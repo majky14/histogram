@@ -44,9 +44,14 @@ public class Application {
         }
         if (cmd.hasOption("n")) {
             try {
-                params.ngram = Integer.parseInt(cmd.getOptionValue("n"));
+                Integer integer = Integer.parseInt(cmd.getOptionValue("n"));
+                if (integer > 0) {
+                    params.ngram = integer;
+                } else {
+                    System.err.println("Invalid ngram parameter: " + integer + ", set to default");
+                }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                System.err.println("Invalid ngram parameter: " + e.getMessage());
             }
         }
         return params;
@@ -61,7 +66,8 @@ public class Application {
         Option string = new Option("s", "string", true, "input string - example: \"test string for parser\"");
         options.addOption(string);
 
-        Option ngram = new Option("n", "ngram", true, "ngram count - integer");
+        Option ngram = new Option("n", "ngram", true, "ngram count - min integer 1");
+        ngram.setType(Integer.class);
         options.addOption(ngram);
 
         Option output = new Option("o", "output", true, "output file path - default file name 'output_file.txt'");
