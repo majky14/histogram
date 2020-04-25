@@ -37,7 +37,7 @@ public abstract class AbstractParser {
             list.add(String.join(JOIN_VALUE, this.lastWords.subList(i, i + this.ngram)));
         }
         this.listener.process(list);
-        this.lastWords = this.lastWords.subList(this.lastWords.size() - this.ngram + 1, this.lastWords.size());
+        this.lastWords = this.lastWords.subList(Math.max(0, this.lastWords.size() - this.ngram + 1), this.lastWords.size());
     }
 
     void complete() {

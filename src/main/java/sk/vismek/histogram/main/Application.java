@@ -16,12 +16,14 @@ import java.io.File;
 
 public class Application {
 
+    private static final String INPUT_FILE = "input_file.txt";
+    private static final String OUTPUT_FILE = "output_file.txt";
+
     public static void main(String[] args) {
         Options options = createOptions();
         CommandLine cmd = createCmd(args, options);
         Params params = parseCmd(cmd);
-        Counter counter = new Counter();
-        params.listener = counter.withWriter(new File(params.output));
+        params.listener = new Counter().withWriter(new File(params.output));
         AbstractParser parser = ParserFactory.getParser(params);
         if (parser == null) {
             System.exit(1);
@@ -30,7 +32,7 @@ public class Application {
     }
 
     private static Params parseCmd(CommandLine cmd) {
-        Params params = new Params(ParserEnum.FILE, "input_file.txt", "output_file.txt", AbstractParser.DEFAULT_NGRAM);
+        Params params = new Params(ParserEnum.FILE, INPUT_FILE, OUTPUT_FILE, AbstractParser.DEFAULT_NGRAM);
         if (cmd.hasOption("f")) {
             params.input = cmd.getOptionValue("f");
         } else if (cmd.hasOption("s")) {

@@ -15,9 +15,9 @@ public class CounterTest {
         counter.process(Arrays.asList("this is", "is test", "test for", "for counter"));
         counter.process(Arrays.asList("is test", "for counter"));
         Map<String, Integer> map = counter.getNgramValues();
-        assertEquals(map.get("this is"), (Integer) 1);
-        assertEquals(map.get("is test"), (Integer) 2);
-        assertEquals(map.get("test for"), (Integer) 1);
-        assertEquals(map.get("for counter"), (Integer) 2);
+        assertEquals((Integer) 1, map.get("this is"));
+        assertEquals((Integer) 2, map.get("is test"));
+        assertEquals((Integer) 1, map.get("test for"));
+        assertEquals((Integer) 2, map.get("for counter"));
     }
 }

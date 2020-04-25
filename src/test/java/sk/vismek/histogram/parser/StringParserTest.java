@@ -17,12 +17,12 @@ public class StringParserTest {
         AbstractParser parser = new StringParser(TEST_STRING, listener);
         parser.parse();
         List<String> parsed = listener.getList();
-        assertEquals(parsed.size(), 5);
-        assertEquals(parsed.get(0), "test for");
-        assertEquals(parsed.get(1), "for parsed");
-        assertEquals(parsed.get(2), "parsed values");
-        assertEquals(parsed.get(3), "values from");
-        assertEquals(parsed.get(4), "from string");
+        assertEquals(5, parsed.size());
+        assertEquals("test for", parsed.get(0));
+        assertEquals("for parsed", parsed.get(1));
+        assertEquals("parsed values", parsed.get(2));
+        assertEquals("values from", parsed.get(3));
+        assertEquals("from string", parsed.get(4));
     }
 
     @Test()
@@ -31,10 +31,29 @@ public class StringParserTest {
         AbstractParser parser = new StringParser(TEST_STRING, 3, listener);
         parser.parse();
         List<String> parsed = listener.getList();
-        assertEquals(parsed.size(), 4);
-        assertEquals(parsed.get(0), "test for parsed");
-        assertEquals(parsed.get(1), "for parsed values");
-        assertEquals(parsed.get(2), "parsed values from");
-        assertEquals(parsed.get(3), "values from string");
+        assertEquals(4, parsed.size());
+        assertEquals("test for parsed", parsed.get(0));
+        assertEquals("for parsed values", parsed.get(1));
+        assertEquals("parsed values from", parsed.get(2));
+        assertEquals("values from string", parsed.get(3));
+    }
+
+    @Test()
+    public void string6Test() {
+        TestListener listener = new TestListener();
+        AbstractParser parser = new StringParser(TEST_STRING, 6, listener);
+        parser.parse();
+        List<String> parsed = listener.getList();
+        assertEquals(1, parsed.size());
+        assertEquals("test for parsed values from string", parsed.get(0));
+    }
+
+    @Test()
+    public void string8Test() {
+        TestListener listener = new TestListener();
+        AbstractParser parser = new StringParser(TEST_STRING, 8, listener);
+        parser.parse();
+        List<String> parsed = listener.getList();
+        assertEquals(0, parsed.size());
     }
 }
